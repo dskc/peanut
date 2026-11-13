@@ -47,8 +47,7 @@ All results: Fashion-MNIST, batch 64, lr 0.01, 3 seeds (0, 1, 42).
 | Adam | 0.8901 | 0.0041 | 0.8968 |
 | Peanut v2 | 0.8972 | 0.0038 | 0.9030 |
 
-Note: Experiment 02 was run to check long training. Peanut v2 stays
-stable on long training.
+Note: Experiment 02 was run to check long training. Peanut v2 stays stable on long training.
 
 ## Conclusion
 
@@ -56,12 +55,11 @@ Peanut v2 does not beat Adam by a lot. It beats Adam by 0.06% to 0.18%
 on most tests. The real win is stability:
 
 - Peanut v2 almost always has lower std than Adam and AdamW.
-- AdamW collapses on some seeds (0.8803 on 【entity-CNN¦canonical_name=CNN】, 0.8366 on MLP).
+- AdamW collapses on some seeds (0.8803 on CNN, 0.8366 on MLP).
 - Peanut v2 never collapses.
 
 Final claim:
-Peanut v2 is a more stable Adam variant with similar accuracy
-and similar time cost on CPU, for small CNN on Fashion-MNIST.
+Peanut v2 is a more stable Adam variant with similar accuracy and similar time cost on CPU, for small CNN on Fashion-MNIST.
 It is not a general SOTA optimizer.
 
 ## How to run
