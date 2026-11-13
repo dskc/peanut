@@ -5,8 +5,8 @@ validated on CPU-only laptop.
 
 Status: Completed, local validation done. Peanut v2 is the final version.
 
-Hardware: CPU-only, 32GB RAM, 【entity-Intel¦canonical_name=Intel】 Alder Lake N-series, 【entity-Windows¦canonical_name=Windows】 11
-Python: 3.13, 【entity-torch¦canonical_name=torch】 2.15.0+cpu, no GPU
+Hardware: CPU-only, 32GB RAM, Intel Alder Lake N-series, Windows 11
+Python: 3.13, torch 2.15.0+cpu, no GPU
 
 ## Structure
 
@@ -32,7 +32,7 @@ bias correction from step 2 onward.
 
 All results: Fashion-MNIST, batch 64, lr 0.01, 3 seeds (0, 1, 42).
 
-### Experiment 01 - 【entity-CNN¦canonical_name=CNN】, 10 epochs
+### Experiment 01 - CNN, 10 epochs
 
 | Optimizer | Mean | Std |
 | --- | --- | --- |
@@ -40,7 +40,7 @@ All results: Fashion-MNIST, batch 64, lr 0.01, 3 seeds (0, 1, 42).
 | AdamW | 0.8889 | 0.0061 |
 | Peanut v2 | 0.8952 | 0.0012 |
 
-### Experiment 02 - 【entity-CNN¦canonical_name=CNN】, 20 epochs
+### Experiment 02 - CNN, 20 epochs
 
 | Optimizer | Mean Final | Std | Mean Max |
 | --- | --- | --- | --- |
