@@ -1,5 +1,5 @@
-# src/optimizers/peanut.py - Peanut v2, final version
-# Adam with damped first step and inflated v init
+# src/optimizers/peanut.py - Peanut v2.2, both dampings LR-aware
+# Best version: mean wins at both 0.003 and 0.01
 import torch
 from torch.optim import Optimizer
 
@@ -17,7 +17,18 @@ class Peanut(Optimizer):
             beta1, beta2 = group['betas']
             eps = group['eps']
             wd = group['weight_decay']
-            damp = group['first_step_damp']
+            base_damp = group['first_step_damp']
+            effective_damp = base_damp * 0.01 / lr
+            if effective_damp > 1.0:
+                effective_damp = 1.0
+            if effective_damp < 0.05:
+                effective_damp = 0.05
+            inflation = lr / 0.01
+            if inflation > 1.0:
+                inflation = 1.0
+            if inflation < 0.0:
+                inflation = 0.0
+            v_factor = (1 - beta2) + beta2 * inflation
             for p in group['params']:
                 if p.grad is None:
                     continue
@@ -29,9 +40,9 @@ class Peanut(Optimizer):
                 if len(state) == 0:
                     state['step'] = 1
                     state['m'] = torch.zeros_like(p)
-                    state['v'] = grad.pow(2)
+                    state['v'] = grad.pow(2).mul_(v_factor)
                     denom = state['v'].sqrt().add_(eps)
-                    p.addcdiv_(grad, denom, value=-lr * damp)
+                    p.addcdiv_(grad, denom, value=-lr * effective_damp)
                     continue
 
                 state['step'] += 1
