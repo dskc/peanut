@@ -35,11 +35,7 @@ Why both? Ablation showed neither change alone works. Only both together beat Ad
 
 All results: Fashion-MNIST, batch 64, 3 seeds (0, 1, 42).
 
-<<<<<<< HEAD
-### Experiment 01 - CNN, 10 epochs
-=======
 ### Experiment 01 - CNN, 10 epochs, LR 0.01, Peanut v2
->>>>>>> 740cb02 (Peanut v2.2 - LR-aware damping, ablation + community CIFR-10 results)
 
 | Optimizer | Mean | Std |
 | --- | --- | --- |
@@ -47,20 +43,13 @@ All results: Fashion-MNIST, batch 64, 3 seeds (0, 1, 42).
 | AdamW | 0.8889 | 0.0061 |
 | Peanut v2 | 0.8952 | 0.0012 |
 
-<<<<<<< HEAD
-### Experiment 02 - CNN, 20 epochs
-=======
 ### Experiment 02 - CNN, 20 epochs, LR 0.01, Peanut v2
->>>>>>> 740cb02 (Peanut v2.2 - LR-aware damping, ablation + community CIFR-10 results)
 
 | Optimizer | Mean Final | Std | Mean Max |
 | --- | --- | --- | --- |
 | Adam | 0.8901 | 0.0041 | 0.8968 |
 | Peanut v2 | 0.8972 | 0.0038 | 0.9030 |
 
-<<<<<<< HEAD
-Note: Experiment 02 was run to check long training. Peanut v2 stays stable on long training.
-=======
 ### Ablation - MLP, 10 epochs, 2 LRs
 
 At LR 0.003:
@@ -97,28 +86,17 @@ v2.2 mean wins at both LRs. At low LR, worst seed is slightly lower than Adam, a
 | Peanut v2 | 56.18% | 52.66% |
 
 Peanut beats Adam by 7.04 points at 0.003 and 5.80 points at 0.01 in this small 3-epoch probe. Peanut vs warmup flips with LR. This is a community probe, not a general claim.
->>>>>>> 740cb02 (Peanut v2.2 - LR-aware damping, ablation + community CIFR-10 results)
 
 ## Conclusion
 
 Peanut v2.2 does not beat Adam by a lot. It beats Adam by 0.06% to 0.18% on most Fashion-MNIST tests. The real win is stability at high LR.
 
-<<<<<<< HEAD
-- Peanut v2 almost always has lower std than Adam and AdamW.
-- AdamW collapses on some seeds (0.8803 on CNN, 0.8366 on MLP).
-- Peanut v2 never collapses.
-
-Final claim:
-Peanut v2 is a more stable Adam variant with similar accuracy and similar time cost on CPU, for small CNN on Fashion-MNIST.
-It is not a general SOTA optimizer.
-=======
 - Peanut v2 almost always has lower std than Adam and AdamW at high LR.
 - AdamW collapses on some seeds (0.8803 on CNN, 0.8366 on MLP).
 - Peanut v2 never collapsed in our Fashion-MNIST tests.
 
 Final claim:
 Peanut v2.2 is a more stable Adam variant with similar accuracy and similar time cost on CPU, for small CNN on Fashion-MNIST. Damping fades at low LR so it behaves close to Adam. It is not a general SOTA optimizer.
->>>>>>> 740cb02 (Peanut v2.2 - LR-aware damping, ablation + community CIFR-10 results)
 
 ## How to run
 
@@ -126,3 +104,14 @@ Peanut v2.2 is a more stable Adam variant with similar accuracy and similar time
 .\venv\Scripts\Activate.ps1
 python experiments\cnn_exp01.py
 python experiments\cnn_exp02.py
+```
+
+Results are saved to `results\cnn_exp01.csv` and `results\cnn_exp02.csv`.
+
+## Limits
+
+- 1 dataset for final validation: Fashion-MNIST
+- 1 architecture for final validation: TinyCNN
+- 3 seeds, lr 0.01 only for CNN, 0.003 and 0.01 for MLP ablation
+- CPU only, no CIFAR-10 by us, no NLP, no tabular
+- Community CIFAR-10 result is a small probe, 12k train, 3k test, 3 epochs
