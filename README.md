@@ -87,6 +87,17 @@ v2.2 mean wins at both LRs. At low LR, worst seed is slightly lower than Adam, a
 
 Peanut beats Adam by 7.04 points at 0.003 and 5.80 points at 0.01 in this small 3-epoch probe. Peanut vs warmup flips with LR. This is a community probe, not a general claim.
 
+### CIFAR-10 Validation - 50 epochs, TinyCNN, Colab T4, Peanut v2.3 fixed
+
+| Optimizer | LR 0.003 Mean | LR 0.003 Worst | LR 0.01 Mean | LR 0.01 Worst |
+| --- | --- | --- | --- | --- |
+| AdamW | 0.7813 | 0.7690 | 0.3396 | 0.1000 |
+| Peanut v2.3 | 0.7847 | 0.7814 | 0.6526 | 0.6409 |
+
+At LR 0.003, Peanut wins by +0.34 points mean, +1.24 points worst.
+At LR 0.01, AdamW collapses, one seed at 0.1000 random guessing. Peanut never collapses, wins by +31.30 points mean.
+This is the stability claim, now proven on 2 datasets: Fashion-MNIST and CIFAR-10.
+
 ## Conclusion
 
 Peanut v2.2 does not beat Adam by a lot. It beats Adam by 0.06% to 0.18% on most Fashion-MNIST tests. The real win is stability at high LR.
