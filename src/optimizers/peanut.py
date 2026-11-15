@@ -39,10 +39,14 @@ class Peanut(Optimizer):
                 state = self.state[p]
                 if len(state) == 0:
                     state['step'] = 1
-                    state['m'] = torch.zeros_like(p)
+                    state['m'] = grad.clone().mul_(1 - beta1)
                     state['v'] = grad.pow(2).mul_(v_factor)
                     denom = state['v'].sqrt().add_(eps)
-                    p.addcdiv_(grad, denom, value=-lr * effective_damp)
+                    # v2.3 fix: Use Adam m, not zero m
+                    # m_hat = m / (1 - beta1) = grad, so first update is same,
+                    # but step 2 now remembers g1: m2 = beta1*(1-beta1)*g1 + (1-beta1)*g2
+                    m_hat = state['m'] / (1 - beta1)
+                    p.addcdiv_(m_hat, denom, value=-lr * effective_damp)
                     continue
 
                 state['step'] += 1
