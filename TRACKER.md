@@ -3,6 +3,56 @@ Current phase: Milestone 1 - Baseline, MNIST 9-run experiment
 Current status: Planning done, code NOT started, waiting to start Milestone 1
 Old plan saved in OLD_PLAN.md, do not execute old plan.
 
+# Peanut - Tracker / TODO
+Current phase: Phase 1 - CIFAR-10 validation
+Current status: Peanut v2.2.0 shipped, MNIST baseline done, Peanut wins
+
+## Phase 0 - Done - Lock v2.2
+- [x] Peanut v2.2 shipped, Release v2.2.0
+- [x] README fixed, no merge markers, tail present
+- [x] LinkedIn draft ready
+
+## Phase 1 - NOW - CIFAR-10 + Reviewer Checklist
+Goal: Prove Peanut on 2nd dataset, answer reviewer 4 points
+
+### MNIST Baseline - Done 16 Nov 2026
+- [x] MNIST, 9 runs, 3 seeds (0,1,42)
+- [x] Adam mean 0.9787, AdamW mean 0.9793, Peanut mean 0.9806
+- [x] Peanut wins by 0.19% over Adam, 0.13% over AdamW
+- [x] Time: Adam 218.8s, AdamW 227.4s, Peanut 203.9s - Peanut not slower
+- [x] RAM: All ~383 MB, same
+- [x] File: results/mnist_baseline.csv
+
+### R1 - CIFAR-10 vs Adam and AdamW - TODO
+- [ ] CIFAR-10, TinyCNN, 50 epochs, batch 128, LR 0.003 and 0.01
+- [ ] Optimizers: Adam vs AdamW vs Peanut v2.2
+- [ ] 5 seeds: 0, 1, 42, 123, 999
+
+### R2 - Training time on identical CPU - TODO
+- [ ] Already DONE for MNIST, need same for CIFAR-10
+- [ ] Log seconds per epoch, total seconds, for all optimizers
+
+### R3 - 5-10 seeds - TODO
+- [ ] Use 5 seeds for CIFAR-10
+- [ ] Report Mean, Std, Worst
+
+### R4 - 100+ epochs - TODO
+- [ ] CIFAR-10, 100 epochs, AdamW vs Peanut v2.2, 3 seeds first
+
+## Phase 2 - TODO - Stronger Baselines
+- [ ] Add Lion, test transformer, Tiny Shakespeare
+
+## Phase 3 - TODO - Make it Usable
+- [ ] Pip installable, 3 examples
+
+## Phase 4 - TODO - Paper
+- [ ] 4-page paper, Hugging Face blog
+
+## V4 Vision - Do Not Start Yet
+- [ ] Decoupled weight decay alone, as v2.3
+- [ ] Adaptive clipping alone, as v2.4
+- [ ] Do NOT start until Phase 1 is [x]
+
 ## Philosophy
 Adam is already highly optimized and extensively researched.
 Peanut must show: better convergence same budget, similar/better accuracy less CPU time, no significant memory increase, stable across seeds.
