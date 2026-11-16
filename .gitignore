@@ -4,3 +4,4 @@ __pycache__/
 *.pyc
 results/
 _private/
+Misc/
