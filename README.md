@@ -98,6 +98,21 @@ At LR 0.003, Peanut wins by +0.34 points mean, +1.24 points worst.
 At LR 0.01, AdamW collapses, one seed at 0.1000 random guessing. Peanut never collapses, wins by +31.30 points mean.
 This is the stability claim, now proven on 2 datasets: Fashion-MNIST and CIFAR-10.
 
+### MNIST Baseline - MLP, 10 epochs, 3 seeds, CPU
+
+| Optimizer | Mean Accuracy | Mean Time | Mean Peak RAM |
+| --- | --- | --- | --- |
+| Adam | 0.9787 | 218.8s | 379 MB |
+| AdamW | 0.9793 | 227.4s | 383 MB |
+| Peanut | 0.9806 | 203.9s | 383 MB |
+
+Peanut beats Adam by 0.19% and AdamW by 0.13% on MNIST.
+Peanut range across seeds: 0.0002, Adam range: 0.0021.
+Peanut is not slower, 7% faster than Adam on same CPU, same code.
+RAM is same for all optimizers.
+
+Full runs in `experiments/mnist_baseline.py`, 3 seeds (0, 1, 42).
+
 ## Conclusion
 
 Peanut v2.2 does not beat Adam by a lot. It beats Adam by 0.06% to 0.18% on most Fashion-MNIST tests. The real win is stability at high LR.
